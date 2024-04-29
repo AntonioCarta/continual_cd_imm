@@ -1,0 +1,22 @@
+other_config:
+  device: -1
+  output_dir: '/raid/carta/cl_dpmm/OMNIGLOT'
+  max_num_cpu: 60
+  seed: 1234
+scenario_config:
+  class: benchmarks.omniglot.domain_incremental_omniglot_alphabets
+feature_extractor_name: "character_omniglot"
+autoencoder_name: "ff_vae"
+
+model:
+  h_dim: [100, 200, 300]
+  fc_layers: [3, 4]
+  fc_units: [100, 200, 300]
+  z_dim: [25, 50, 100]
+  input_size: 64
+
+num_classes: 50
+iters: 1000
+batch_size: 32
+eval_s: 20
+is_grid_search: False

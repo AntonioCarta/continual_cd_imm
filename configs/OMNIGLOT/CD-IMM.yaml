@@ -1,0 +1,26 @@
+other_config:
+  device: -1
+  output_dir: '/raid/carta/cl_dpmm/OMNIGLOT'
+  seed: -1
+scenario_config:
+  class: benchmarks.omniglot.domain_incremental_omniglot_alphabets
+feature_extractor_name: "character_omniglot"
+training_config:
+  n_epochs: 10
+classifier_config:
+  class: models.cd_imm.CD_IMM
+  params:
+    K: 50
+    D: 64
+    alphaDP: [0.1, 1, 10]
+    tau0: 0
+    c0: 0.01
+    n0: 66
+    B0: [0.01, 0.1, 1]
+    is_diagonal: [False, True]
+    variance_init_value: [1, 10, 20]
+    num_classes: 50
+optimiser_config:
+  class: torch.optim.SGD
+  params:
+    lr: 0.8

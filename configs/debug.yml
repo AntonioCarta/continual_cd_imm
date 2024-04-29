@@ -1,0 +1,39 @@
+other_config:
+  device: -1
+  output_dir: '/data/castellana/CL-exp/results/'
+  max_num_cpu: 60
+scenario_config:
+  class: avalanche.benchmarks.classic.SplitMNIST
+  params:
+    n_experiences: 5
+    seed: 1
+    train_transform_config:
+      class: torchvision.transforms.ToTensor
+    eval_transform_config:
+      class: torchvision.transforms.ToTensor
+feature_extractor_config:
+  class: models.misc.FlattenInput
+classifier_config:
+  class: models.classifiers.DPMixtureModel
+  params:
+    K: 100
+    D: 784
+    gamma: 1
+    num_true_labels: 10
+    emission_distr_config:
+      class: models.emissions.DiagonalGaussianDistribution
+      params:
+        mu0: th.zeros(D)
+        lam0: 1
+        nu0:  1
+        b0: th.ones(D)
+        tied: True
+    clustering: 'auto'
+strategy_config:
+  class: models.training.OnlineProbabilisticTrainer
+  params:
+    train_mb_size: 1024
+    train_epochs: 1
+    eval_mb_size: 32
+    smart_init: True
+    n_clusters_every_batch: 10

@@ -1,0 +1,30 @@
+other_config:
+  device: -1
+  output_dir: 'results'
+  seed: 12345
+scenario_config:
+  class: benchmarks.NCMoons
+  params:
+    n_experiences: 5
+    num_samples: 20000
+    num_classes: 10
+    noise: 0.05
+feature_extractor_config:
+  class: models.misc.FlattenInput
+classifier_config:
+  class: models.cd_imm.CD_IMM
+  params:
+    num_class: 10
+    K: 100
+    D: 2
+    alphaDP: 10
+    tau0: 0
+    c0: 0.001
+    n0: 4
+    B0: 0.001
+    is_diagonal: False
+    num_classes: 2
+optimiser_config:
+  class: torch.optim.SGD
+  params:
+    lr: 0.8

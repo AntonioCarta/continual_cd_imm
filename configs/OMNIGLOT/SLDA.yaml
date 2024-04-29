@@ -1,0 +1,16 @@
+other_config:
+  device: 0
+  output_dir: '/raid/carta/cl_dpmm/OMNIGLOT'
+  seed: 23456
+scenario_config:
+  class: benchmarks.omniglot.domain_incremental_omniglot_alphabets
+feature_extractor_name: "character_omniglot"
+strategy_config:
+  class: StreamingLDA
+  params:
+    train_mb_size: 256
+    streaming_update_sigma: [True, False]
+    input_size: 64
+
+num_classes: 50
+is_grid_search: False

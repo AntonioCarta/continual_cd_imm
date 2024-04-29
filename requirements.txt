@@ -1,0 +1,8 @@
+torch
+torchvision
+setGPU
+avalanche-lib @ git+https://github.com/ContinualAI/avalanche@373c4cc
+pandas
+seaborn
+visdom
+tensorboardx

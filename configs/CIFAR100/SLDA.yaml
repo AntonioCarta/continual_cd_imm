@@ -1,0 +1,18 @@
+other_config:
+  device: 0
+  output_dir: '/raid/carta/cl_dpmm/CIFAR100'
+  seed: 23456
+scenario_config:
+  class: benchmarks.cifar100.cifar100_superclasses
+  params:
+    num_experiences: 10
+feature_extractor_name: "cifar10_resnet18"
+strategy_config:
+  class: StreamingLDA
+  params:
+    train_mb_size: 256
+    streaming_update_sigma: [True, False]
+    input_size: 160
+
+num_classes: 20
+is_grid_search: False

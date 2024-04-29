@@ -1,0 +1,122 @@
+other_config:
+  device: 0
+  output_dir: '/raid/carta/cl_dpmm/CIFAR100'
+  seed: 60
+scenario_config:
+  class: benchmarks.cifar100.cifar100_superclasses
+  params:
+    num_experiences: 10
+training_config:
+  n_epochs: 10
+feature_extractor_name: "cifar10_resnet18"
+cn_dpm_config:
+  ###########
+  # Dataset #
+  ###########
+
+  data_root: './data'
+  batch_size: 10
+  num_workers: 0
+  sleep_batch_size: 50
+  sleep_num_workers: 0
+  eval_batch_size: 100
+  eval_num_workers: 0
+
+  label_offset:
+    cifar100: 0
+
+
+  #########
+  # Model #
+  #########
+
+  x_c: 160
+  x_h: 1
+  x_w: 1
+  y_c: 20
+
+  device: 'cuda'
+
+  model_name: 'ndpm_model'
+  g: 'mlp_vae'
+  d: 'mlp_classifier'
+  disable_d: False
+  vae_nf: [100, 200, 300]
+  z_dim: [25, 50, 100]
+  cls_nf:  [100, 200, 300]
+  norm_layer: InstanceNorm2d
+  z_samples: 16
+
+  recon_loss: 'gaussian'
+  x_log_var_param: 0
+  learn_x_log_var: false
+
+  classifier_chill: 0.01
+
+
+  #########
+  # DPMoE #
+  #########
+
+  send_to_stm_always: False
+  log_alpha: -300
+  stm_capacity: 1000
+  stm_erase_period: 0
+  sleep_step_g: 4000
+  sleep_step_d: 1000
+  sleep_summary_step: 500
+  sleep_val_size: 0
+
+
+  #########
+  # Train #
+  #########
+
+  implicit_lr_decay: False
+  weight_decay: 0.00001
+
+  optimizer_g:
+    type: Adam
+    options:
+      lr: 0.0001
+
+  lr_scheduler_g:
+    type: MultiStepLR
+    options:
+      milestones_list: [ 1 ]
+      gamma: 0.2
+
+  optimizer_d:
+    type: Adam
+    options:
+      lr: 0.0002
+
+  lr_scheduler_d:
+    type: MultiStepLR
+    options:
+      milestones_list: [ 1 ]
+      gamma: 0.2
+
+  clip_grad:
+    type: value
+    options:
+      clip_value: 0.5
+
+
+  ########
+  # Eval #
+  ########
+
+  eval_d: True
+  eval_g: False
+  eval_t: False
+
+
+  ###########
+  # Summary #
+  ###########
+
+  summary_step: 250
+  eval_step: 250
+  summarize_samples: False
+

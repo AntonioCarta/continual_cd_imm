@@ -1,0 +1,26 @@
+other_config:
+  device: -1
+  output_dir: '/raid/carta/cl_dpmm/MOONS'
+  max_num_cpu: 60
+scenario_config:
+  class: benchmarks.moons.NIMoons
+  params:
+    n_experiences: 5
+    num_samples: 20000
+    num_classes: 2
+    noise: 0.05
+feature_extractor_name: "identity"
+autoencoder_name: "ff_vae"
+
+model:
+  h_dim: 20
+  fc_layers: [2, 3]
+  fc_units: [20, 50, 100]
+  z_dim: [5, 10, 20]
+  input_size: 2
+
+num_classes: 2
+iters: 10000
+batch_size: 32
+eval_s: 20
+is_grid_search: False
