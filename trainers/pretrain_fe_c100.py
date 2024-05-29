@@ -107,7 +107,7 @@ if __name__ == '__main__':
         model.train()
         acc_es = None
         print(f"e={e}")
-        for x, y in DataLoader(data, batch_size=128, num_workers=8):
+        for x, y in DataLoader(data, batch_size=128, num_workers=8, shuffle=True):
             opt.zero_grad()
             x, y = x.cuda(), y.cuda()
             yp = model(x)
